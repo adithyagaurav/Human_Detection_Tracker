@@ -15,6 +15,10 @@ This project is developed for ACME robotics to implement a Human Detection and T
 2. Tracker : When processing a stream of frames, each bounding box around a human is given a ID which tracks the bounding box throught the frame
 3. Pose Estimation : Each detection is obtained in image frame and then converted to robot frame using focal length and lens formula. 
 
+## Video Presentation
+
+Video URL : [Google Drive Link](https://drive.google.com/file/d/10-Vi5va9PnPhw9LVTjHhYjcbIj9v9500/view?usp=sharing)
+
  ## UML Class Diagram
 
  !["Class Diagram"](UML/UML_diagram.jpg)
