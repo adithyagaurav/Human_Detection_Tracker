@@ -8,7 +8,7 @@
  - **UMD Design Kepeer** : Divyansh Agarwal (UID - 117730692)
 
  ## UML Class Diagram
- !["Class Diagram"](/run/user/1000/doc/4583b23c/UML_diagram.jpg)
+ !["Class Diagram"](UML/UML_diagram.jpg)
 
 ----
 ## C++ Boilerplate
