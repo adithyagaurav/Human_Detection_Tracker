@@ -7,7 +7,16 @@
  - **Navigator** : Rishabh Singh (UID - 117511208)
  - **UMD Design Kepeer** : Divyansh Agarwal (UID - 117730692)
 
+## Project Description
+
+This project is developed for ACME robotics to implement a Human Detection and Tracking functionality. The project has 3 main contirbutions, which are as follows:
+
+1. Detector :  YoloV4 is used to detect humans in images and videos
+2. Tracker : When processing a stream of frames, each bounding box around a human is given a ID which tracks the bounding box throught the frame
+3. Pose Estimation : Each detection is obtained in image frame and then converted to robot frame using focal length and lens formula. 
+
  ## UML Class Diagram
+
  !["Class Diagram"](UML/UML_diagram.jpg)
 
 ----
