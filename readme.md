@@ -21,7 +21,7 @@ Video URL : [Google Drive Link](https://drive.google.com/file/d/10-Vi5va9PnPhw9L
 
  ## UML Class Diagram
 
- !["Class Diagram"](UML/UML_diagram.jpg)
+ !["Class Diagram"](UML/initial/UML_diagram.jpg)
 
 ----
 ## C++ Boilerplate
