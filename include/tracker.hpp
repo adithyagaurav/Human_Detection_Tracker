@@ -14,8 +14,9 @@
  #define INCLUDE_TRACKER_HPP_
  #include <iostream>
  #include <vector>
+ #include "detector.hpp"
 
- namespace acme{
+namespace acme{
  class Tracker{
     public:
     std::vector<acme::Object> updateTracker(std::vector<acme::Object> bboxes);
