@@ -18,6 +18,10 @@
  #include "tracker.hpp"
  #include "utils.hpp"
  #include "detector.hpp"
+ #include <opencv2/opencv.hpp>
+ #include <opencv2/core/core.hpp>
+ #include <opencv2/imgcodecs.hpp>
+
 
  namespace acme{
 

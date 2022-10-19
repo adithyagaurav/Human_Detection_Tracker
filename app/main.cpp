@@ -5,7 +5,7 @@ int main()
 {
     int mode;
     double focalLength;
-    std::cout<<"Select run mode : {1 : Image mode, 2 : Stream mode}";
+    std::cout<<"Select run mode : {1 : Image mode, 2 : Stream mode}"<<std::endl;
     std::cin>>mode;
     std::cout<<std::endl;
     std::cout<<"Enter focal length : ";

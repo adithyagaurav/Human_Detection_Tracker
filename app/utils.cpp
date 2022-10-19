@@ -23,8 +23,18 @@
     return output;
  }
 
- void acme::Utils::draw(cv::Mat frame, std::vector<acme::Pose> pose_bboxes){
-    std::cout<<"Output drawn on input image and displaying"<<std::endl;
+ void acme::Utils::draw(cv::Mat frame, std::vector<acme::Object> obj_bboxes, cv::Size insize, cv::Size outsize){
+   cv::Mat out_frame = frame.clone();
+   cv::Scalar color = cv::Scalar(0, 0, 255);
+   cv::Scalar l_color = cv::Scalar::all(255);
+   cv::Point tl;
+   cv::Point br;
+   for (int i=0 ; i<obj_bboxes.size();i++){
+      tl = cv::Point((obj_bboxes[i].box_x_/insize.width)*outsize.width, (obj_bboxes[i].box_y_/insize.height)*outsize.height);
+      br = cv::Point((obj_bboxes[i].box_x_+obj_bboxes[i].box_w_)*outsize.width/insize.width, (obj_bboxes[i].box_y_+obj_bboxes[i].box_h_)*outsize.height/insize.height);
+      cv::rectangle(out_frame, tl, br, color, 1);
+   }
+   cv::imwrite("../data/out.jpg", out_frame);
  }
 
  double acme::Utils::calculateIoU(acme::Pose pose1, acme::Pose pose2){

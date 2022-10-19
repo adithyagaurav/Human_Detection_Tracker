@@ -15,6 +15,12 @@
  #define INCLUDE_DETECTOR_HPP_
  #include<iostream>
  #include<vector>
+ #include <opencv2/opencv.hpp>
+ #include <opencv2/core/core.hpp>
+ #include <opencv2/imgcodecs.hpp>
+ #include <opencv2/dnn/dnn.hpp>
+ #include <opencv2/dnn/shape_utils.hpp>
+
 
  namespace acme{
     struct Object{
@@ -23,7 +29,7 @@
         double box_y_;
         double box_h_;
         double box_w_;
-        int class_idx;
+        std::string class_name;
     };
 
     struct Pose{
@@ -42,13 +48,20 @@
         public:
         void initModel();
         std::vector<acme::Object> detect(cv::Mat frame);
-        Detector(double image_w, double image_h, int target_id, float conf);
+        std::vector<cv::Mat> preProcess(const cv::Mat &frame);
+        std::vector<acme::Object> postProcess(cv::Size &s);
+        Detector();
+        Detector(double imageW, double imageH, std::vector<std::string> targetClasses, float conf);
         ~Detector();
         private:
-        int target_class_idx;
-        double image_h;
-        double image_w;
-        float conf_thresh;
+        std::vector<cv::Mat> outputs_;
+        std::vector<std::string> allClasses_;
+        std::vector<std::string> targetClasses_;
+        cv::dnn::Net net_;
+        double imgH_;
+        double imgW_;
+        float confThresh_;
+        float nmsThresh_;
     };
  }
 
