@@ -14,12 +14,15 @@
  #define INCLUDE_UTILS_HPP_
  #include <iostream>
  #include <vector>
+ #include "detector.hpp"
 
  namespace acme{
     class Utils{
         public:
-        std::vector<acme::Pose> getFinalBoxes(std::vector<acme::Object> bboxes);
+        std::vector<acme::Pose> getFinalBoxes(std::vector<acme::Object> bboxes, float depth_coeff);
         void draw(cv::Mat frame, std::vector<acme::Pose> pose_bboxes);
-        void calculateIoU(acme::Pose pose1, acme::Pose pose2);
-    }
+        double calculateIoU(acme::Pose pose1, acme::Pose pose2);
+    };
  }
+
+#endif
