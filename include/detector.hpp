@@ -17,6 +17,27 @@
  #include<vector>
 
  namespace acme{
+    struct Object{
+        int track_idx_;
+        double box_x_;
+        double box_y_;
+        double box_h_;
+        double box_w_;
+        int class_idx;
+    };
+
+    struct Pose{
+        int track_idx_;
+        double box_x_;
+        double box_y_;
+        double box_h_;
+        double box_w_;
+        double box_z_;
+        std::string class_name_;
+        std::vector<std::string> all_classes;
+    };
+
+
     class Detector{
         public:
         void initModel();
