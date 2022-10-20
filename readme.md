@@ -1,3 +1,8 @@
+[![Build Status](https://github.com/adithyagaurav/Human_Detection_Tracker/actions/workflows/build_and_coveralls.yml/badge.svg)](https://github.com/TommyChangUMD/cpp-boilerplate/actions/workflows/build_and_coveralls.yml)
+[![Coverage Status](https://coveralls.io/repos/github/TommyChangUMD/cpp-boilerplate/badge.svg?branch=master)](https://coveralls.io/github/adithyagaurav/Human_Detection_tracker?branch=master
+
+
+
 # ENPM 808X Midterm Project 
 
 # Human Detection and Tracking
@@ -21,10 +26,18 @@ Video URL : [Google Drive Link](https://drive.google.com/file/d/10-Vi5va9PnPhw9L
 
  ## UML Class Diagram
 
- !["Class Diagram"](UML/UML_diagram.jpg)
+ !["Class Diagram"](UML/initial/UML_diagram.jpg)
 
-----
+
+
+## Demo Output
+
+![Output from YoloV4 model](./data/output.jpg)
+
+
+
 ## C++ Boilerplate
+
 ---
 
 ## Overview

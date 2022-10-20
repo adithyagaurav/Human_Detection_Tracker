@@ -18,6 +18,10 @@
  #include "tracker.hpp"
  #include "utils.hpp"
  #include "detector.hpp"
+ #include <opencv2/opencv.hpp>
+ #include <opencv2/core/core.hpp>
+ #include <opencv2/imgcodecs.hpp>
+
 
  namespace acme{
 
@@ -25,16 +29,16 @@
     public:
     void run(int mode);
     void processImage(std::string image_path);
-    std::vector<acme::Object> processStream();
-    Robot(float focalLength);
+    void processStream();
+    Robot(double focalLength);
     ~Robot();
     private:
-    Detector detector_;
-    Pose pose_;
+    acme::Detector detector_;
+    std::vector<acme::Pose> poses;
     float depth_coeff_;
     float focal_length_;
     std::vector<acme::Object> objects;
-    Tracker tracker_;
+    acme::Tracker tracker_;
  };
 }
 
