@@ -1,0 +1,12 @@
+Done processing ./app/detector.cpp
+Done processing ./app/main.cpp
+Done processing ./app/robot.cpp
+Done processing ./app/tracker.cpp
+Done processing ./app/utils.cpp
+Done processing ./include/detector.hpp
+Done processing ./include/robot.hpp
+Done processing ./include/tracker.hpp
+Done processing ./include/utils.hpp
+Done processing ./test/main.cpp
+Done processing ./test/test.cpp
+Total errors found: 3
