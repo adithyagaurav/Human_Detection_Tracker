@@ -1,30 +1,83 @@
-/**
- * @file utils.hpp
- * @author 
- * Navigator : Rishabh Singh ( )
- * Driver : Adithya Singh (agsingh@umd.edu)
- * @brief 
- * @version 0.1
- * @date 2022-10-16
+/******************************************************************************
+ * MIT License
  * 
- * @copyright Copyright (c) 2022
+ * Copyright (c) 2021 Adithya Singh, Rishabh Singh, Divyansh Agarwal
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE. 
+ ******************************************************************************/
+
+/**
+/**
+* @file utils.hpp
+* @author Rishabh Singh 
+* @author  Adithya Singh
+* @author Divyansh Agarwal
+* @brief Class declaration for Utils
+* @version 0.1
+* @date 2022-10-16
+* 
+* @copyright Copyright (c) 2022
+* 
+*/
+#ifndef INCLUDE_UTILS_HPP_
+#define INCLUDE_UTILS_HPP_
+#include <iostream>
+#include <vector>
+#include "../include/detector.hpp"
+#include <opencv2/opencv.hpp>
+
+
+namespace acme {
+/**
+ * @brief Class for helper functions
  * 
  */
- #ifndef INCLUDE_UTILS_HPP_
- #define INCLUDE_UTILS_HPP_
- #include <iostream>
- #include <vector>
- #include "detector.hpp"
- #include <opencv2/opencv.hpp>
+class Utils {
+ public:
+    /**
+     * @brief Get the Final Boxes object
+     * 
+     * @param bboxes 
+     * @param depth_coeff 
+     * @return std::vector<acme::Pose> 
+     */
+    std::vector<acme::Pose> getFinalBoxes(std::vector<acme::Object>
+                                        &bboxes, float depth_coeff);
+    /**
+     * @brief Draw object bounding boxes on Image
+     * 
+     * @param frame 
+     * @param pose_bboxes 
+     * @param insize 
+     * @param outsize 
+     */
+    void draw(cv::Mat frame, std::vector<acme::Object> &pose_bboxes,
+            cv::Size insize, cv::Size outsize);
+    /**
+     * @brief Calculate IoU
+     * 
+     * @param pose1 
+     * @param pose2 
+     * @return double 
+     */
+    double calculateIoU(acme::Pose &pose1, acme::Pose &pose2);
+};
+}  // namespace acme
 
-
- namespace acme{
-    class Utils{
-        public:
-        std::vector<acme::Pose> getFinalBoxes(std::vector<acme::Object> bboxes, float depth_coeff);
-        void draw(cv::Mat frame, std::vector<acme::Object> pose_bboxes, cv::Size insize, cv::Size outsize);
-        double calculateIoU(acme::Pose pose1, acme::Pose pose2);
-    };
- }
-
-#endif
+#endif  // INCLUDE_UTILS_HPP_
