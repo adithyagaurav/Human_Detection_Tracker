@@ -1,4 +1,4 @@
-[![Build Status](https://github.com/adithyagaurav/Human_Detection_Tracker/actions/workflows/build_and_coveralls.yml/badge.svg)](https://github.com/TommyChangUMD/cpp-boilerplate/actions/workflows/build_and_coveralls.yml)
+[![Build Status](https://github.com/adithyagaurav/Human_Detection_Tracker/actions/workflows/build_and_coveralls.yml/badge.svg)](https://github.com/adithyagaurav/Human_Detection_Tracker/actions/workflows/build_and_coveralls.yml)
 [![Coverage Status](https://coveralls.io/repos/github/adithyagaurav/Human_Detection_Tracker/badge.svg?branch=master)](https://coveralls.io/github/adithyagaurav/Human_Detection_Tracker?branch=master)
 
 
@@ -26,7 +26,7 @@ Video URL : [Google Drive Link](https://drive.google.com/file/d/10-Vi5va9PnPhw9L
 
  ## UML Class Diagram
 
- !["Class Diagram"](UML/initial/UML_diagram.jpg)
+ !["Class Diagram"](UML/revised/UML_diagram.jpg)
 
 
 
