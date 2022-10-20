@@ -34,8 +34,8 @@ jobs:
       - uses: actions/checkout@v3
       
       - name: Install Opencv and dependencies
-      - run: sudo chmod +x requirements.sh
-      - run: ./requirements.sh
+        run: sudo chmod +x requirements.sh
+        run: ./requirements.sh
       
       # Install some system pacakges
       - name: Install packages
