@@ -1,5 +1,5 @@
-[![Build Status](https://github.com/adithyagaurav/Human_Detection_Tracker/actions/workflows/build_and_coveralls.yml/badge.svg)](https://github.com/TommyChangUMD/cpp-boilerplate/actions/workflows/build_and_coveralls.yml)
-[![Coverage Status](https://coveralls.io/repos/github/TommyChangUMD/cpp-boilerplate/badge.svg?branch=master)](https://coveralls.io/github/adithyagaurav/Human_Detection_tracker?branch=master
+[![Build Status](https://github.com/adithyagaurav/Human_Detection_Tracker/actions/workflows/build_and_coveralls.yml/badge.svg)](https://github.com/adithyagaurav/Human_Detection_Tracker/actions/workflows/build_and_coveralls.yml)
+[![Coverage Status](https://coveralls.io/repos/github/adithyagaurav/Human_Detection_Tracker/badge.svg?branch=master)](https://coveralls.io/github/adithyagaurav/Human_Detection_Tracker?branch=master)
 
 
 
@@ -12,13 +12,19 @@
  - **Navigator** : Rishabh Singh (UID - 117511208)
  - **UMD Design Kepeer** : Divyansh Agarwal (UID - 117730692)
 
-## Project Description
+## Overview
 
 This project is developed for ACME robotics to implement a Human Detection and Tracking functionality. The project has 3 main contirbutions, which are as follows:
 
 1. Detector :  YoloV4 is used to detect humans in images and videos
 2. Tracker : When processing a stream of frames, each bounding box around a human is given a ID which tracks the bounding box throught the frame
-3. Pose Estimation : Each detection is obtained in image frame and then converted to robot frame using focal length and lens formula. 
+3. Pose Estimation : Each detection is obtained in image frame and then converted to robot frame using focal length and lens formula.
+
+The project has two modes of operations, image mode and stream mode. In image mode, model performs detection on a single image and draws the bounding box around all detections. In stream mode, model processes a stream of images from a webcam, and tracks each objects through the frames.
+
+We decided to opt for the deep learning approach for this project over tradtional detection approaches due to its high performance and low latency qualities. We use OpenCV frame work for this project which used its dnn libraries to perform neural network operations.
+
+
 
 ## Video Presentation
 
@@ -26,7 +32,7 @@ Video URL : [Google Drive Link](https://drive.google.com/file/d/10-Vi5va9PnPhw9L
 
  ## UML Class Diagram
 
- !["Class Diagram"](UML/initial/UML_diagram.jpg)
+ !["Class Diagram"](UML/revised/UML.jpeg)
 
 
 
@@ -34,18 +40,13 @@ Video URL : [Google Drive Link](https://drive.google.com/file/d/10-Vi5va9PnPhw9L
 
 ![Output from YoloV4 model](./data/output.jpg)
 
+## Sprints and Backlogs
+For this project Agile Iterative Process techniques were followed.
+Sprint URL : [Sprint](https://docs.google.com/document/d/1zNT1Lpt2RIhAPXhDCSRGpUpMemdmEOlnC4JlLw5574I/edi)
+Product & Interation Backlog : [ProductBCK](https://docs.google.com/spreadsheets/d/11ZNZkYG7Tr5bm_ZU3U6apQA8bG3-O703KbSEKB_j2WA/edit#gid=0)
 
-
-## C++ Boilerplate
-
----
-
-## Overview
-
-Simple starter C++ project with:
-
-- cmake
-- googletest
+## Phase 1
+In phase 1, we were able to implement the image mode of the project, stubs have been written for stream mode of the project and is expected to be completed by phase 2.
 
 ## Standard install via command-line
 ```
