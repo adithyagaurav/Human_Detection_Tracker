@@ -28,7 +28,7 @@ We decided to opt for the deep learning approach for this project over tradtiona
 
 ## Video Presentation
 
-Video URL : [Google Drive Link](https://drive.google.com/file/d/10-Vi5va9PnPhw9LVTjHhYjcbIj9v9500/view?usp=sharing)
+Video URL : [Google Drive Link](https://drive.google.com/file/d/1CmQ9QwxbvStY9G-XkPPm0ErwoJgXboIH/view?usp=sharing
 
  ## UML Class Diagram
 
