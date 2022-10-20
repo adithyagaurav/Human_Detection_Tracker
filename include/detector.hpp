@@ -48,7 +48,7 @@
         public:
         void initModel();
         std::vector<acme::Object> detect(cv::Mat frame);
-        std::vector<cv::Mat> preProcess(const cv::Mat &frame);
+        void preProcess(const cv::Mat &frame);
         std::vector<acme::Object> postProcess(cv::Size &s);
         Detector();
         Detector(double imageW, double imageH, std::vector<std::string> targetClasses, float conf);

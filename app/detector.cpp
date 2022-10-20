@@ -55,7 +55,7 @@
     acme::Detector::preProcess(temp);
  }
 
- std::vector<cv::Mat> acme::Detector::preProcess(const cv::Mat &frame){
+ void acme::Detector::preProcess(const cv::Mat &frame){
    cv::Mat blob;
    if (!frame.empty()){
       blob=cv::dnn::blobFromImage(frame, 1/255.0, cv::Size(imgW_, imgH_), cv::Scalar(), true, false);
@@ -66,7 +66,6 @@
    else{
       std::cout<<"Image invalid";
    }
-   return outputs_;
  }
 
  std::vector<acme::Object> acme::Detector::postProcess(cv::Size &s){
@@ -144,7 +143,7 @@ return detections;
  std::vector<acme::Object> acme::Detector::detect(cv::Mat frame){
     std::vector<acme::Object> output;
     std::vector<cv::Mat> detections;
-    detections = acme::Detector::preProcess(frame);
+    acme::Detector::preProcess(frame);
     cv::Size size = frame.size();
     output = acme::Detector::postProcess(size);
     return output;

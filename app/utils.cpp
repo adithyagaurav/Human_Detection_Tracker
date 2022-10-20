@@ -18,8 +18,10 @@
     std::vector<acme::Pose> output;
     acme::Pose pose1{1, 12.0, 10.0, 30.0, 20.0, 5.0, "person"};
     acme::Pose pose2{2, 32.0, 27.0, 25.0, 15.0, 6.0, "person"};
+    acme::Pose pose3{2, 32.0, 27.0, 25.0, 15.0, 6.0, "person"};
     output.push_back(pose1);
     output.push_back(pose2);
+    output.push_back(pose3);
     return output;
  }
 

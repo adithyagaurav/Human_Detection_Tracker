@@ -29,7 +29,7 @@
     public:
     void run(int mode);
     void processImage(std::string image_path);
-    std::vector<acme::Object> processStream();
+    void processStream();
     Robot(double focalLength);
     ~Robot();
     private:

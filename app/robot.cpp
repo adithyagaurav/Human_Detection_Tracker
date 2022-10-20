@@ -38,8 +38,14 @@
  void acme::Robot::run(int mode){
    std::cout<<"Run mode "<<mode<<std::endl;
    if (mode == 1) {
-    std::string imagePath = "../data/image.jpg";
+    std::string imagePath = "../data/image3.jpg";
     processImage(imagePath);
+   }
+   else if (mode==2){
+    processStream();
+   }
+   else {
+    std::cout<<"Invalid mode"<<std::endl;
    }
  }
 
@@ -57,5 +63,7 @@
    std::cout<<"Image size : "<<img.size().width<<" x "<<img.size().height<<std::endl;
  }
 
- std::vector<acme::Object> acme::Robot::processStream(){
+ void acme::Robot::processStream(){
+  std::cout<<"Processing stream"<<std::endl;
+
  }

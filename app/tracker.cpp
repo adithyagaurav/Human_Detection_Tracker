@@ -15,7 +15,8 @@
  #include "../include/tracker.hpp"
 
  std::vector<acme::Object> acme::Tracker::updateTracker(std::vector<acme::Object> bboxes){
-   
+   std::cout<<"Track IDs assigned"<<std::endl;
+   return bboxes;
  }
 
  acme::Tracker::Tracker(){
