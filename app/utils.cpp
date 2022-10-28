@@ -40,7 +40,13 @@
 
 std::vector<acme::Pose> acme::Utils::getFinalBoxes(
                   std::vector<acme::Object> &bboxes, float depth_coeff) {
-    // Stub implementation
+    for (auto& it : &bboxes) {
+        float actual_h = 72;
+        float depth = depth_coeff * actual_h / it.box_h_;
+
+        it.box_z_ = depth;
+
+    }
     std::vector<acme::Pose> output;
     acme::Pose pose1{1, 12.0, 10.0, 30.0, 20.0, 5.0, "person"};
     acme::Pose pose2{2, 32.0, 27.0, 25.0, 15.0, 6.0, "person"};
