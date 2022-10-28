@@ -40,7 +40,15 @@
 
 std::vector<acme::Object> acme::Tracker::updateTracker(
                                 std::vector<acme::Object> bboxes) {
-    // Stub Implementation
+
+    int count = 0;
+    for (auto& it : bboxes) {
+        if (it.class_name == "person") {
+            count = count + 1;
+            it.track_idx_ = count;
+        }
+    }
+    
     std::cout << "Track IDs assigned" << std::endl;
     return bboxes;
 }
