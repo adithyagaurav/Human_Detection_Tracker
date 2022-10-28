@@ -52,11 +52,11 @@ std::vector<acme::Pose> acme::Utils::getFinalBoxes(
 }
 
 void acme::Utils::draw(cv::Mat frame, std::vector<acme::Object> &obj_bboxes,
-               cv::Size insize, cv::Size outsize) {
+               cv::Size insize, cv::Size outsize, bool display) {
     // Create copy of frame
     cv::Mat out_frame = frame.clone();
     // Set bbox and label color
-    cv::Scalar color = cv::Scalar(0, 0, 255);
+    cv::Scalar color = cv::Scalar(0, 255, 0);
     // Store top left and bottom right points
     cv::Point tl;
     cv::Point br;
@@ -73,9 +73,18 @@ void acme::Utils::draw(cv::Mat frame, std::vector<acme::Object> &obj_bboxes,
         obj_bboxes[i].box_h_)*outsize.height / insize.height);
         // Draw rectangle
         cv::rectangle(out_frame, tl, br, color, 1);
+
+        cv::Point label_tl = cv::Point(tl.x, abs(tl.y - 10));
+        std::string label_text = std::to_string(obj_bboxes[i].track_idx_);
+        cv::putText(out_frame, label_text, label_tl, cv::FONT_HERSHEY_SIMPLEX, 0.5, color, 2);
     }
+    if (display==true){
+        cv::imshow("Output", out_frame);
+        cv::waitKey(1);
+    } else {
     // Save image
-    cv::imwrite("../data/out.jpg", out_frame);
+        cv::imwrite("../data/out.jpg", out_frame);
+    }
 }
 
 double acme::Utils::calculateIoU(acme::Pose &pose1, acme::Pose &pose2) {
