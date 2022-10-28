@@ -38,13 +38,14 @@
  */
 
 #include "../include/robot.hpp"
+#include <string>
 
 
 acme::Robot::Robot(double focal_length) {
   // Set the constants
   double image_w_ = 416;
   double image_h_ = 416;
-  float conf = 0.2;
+  float conf = 0.5;
   depth_coeff_ = 0.7;
   std::vector<std::string> targetClasses{"person"};
 
@@ -94,7 +95,7 @@ void acme::Robot::processImage(std::string imagePath) {
     acme::Utils utils_;
 
     // Draw output on image
-    utils_.draw(img , output, insize, outsize);
+    utils_.draw(img , output, insize, outsize, false);
 
     // Display detection information
     std::cout << "Total objects found : " << output.size() << std::endl;
@@ -103,5 +104,32 @@ void acme::Robot::processImage(std::string imagePath) {
 }
 
 void acme::Robot::processStream() {
-std::cout << "Processing stream" << std::endl;
+    
+    // std::string filename = "../data/test_video.mp4";
+    std::string filename = "/home/ubuntu/PMRO/ENPM808X/midterm/Human_Detection_Tracker/data/test_video.mp4";
+
+    cv::VideoCapture cap;
+    cap.open(filename, cv::CAP_FFMPEG);
+    cv::Mat frame;
+    cap>>frame;
+    std::vector<acme::Object> output;
+    cv::Mat resizeFrame;
+    cv::Size insize = cv::Size(416, 416);
+    cv::Size outsize = frame.size();
+    acme::Utils utils_;
+    int counter=0;
+    while(frame.size().width!=0)
+    {
+        cap >> frame;
+        cv::resize(frame, resizeFrame, insize);
+        output = detector_.detect(resizeFrame);
+        utils_.draw(frame, output, insize, outsize, true);
+        counter++;
+        std::cout<<"Frame processed : "<<counter<<std::endl;
+
+    }
+    if (!cap.isOpened()){
+        std::cerr<<"UNABLE TO OPEN CAMERA"<<std::endl;
+    }
+
 }
