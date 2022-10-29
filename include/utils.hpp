@@ -40,8 +40,13 @@
 #include <iostream>
 #include <vector>
 #include "../include/detector.hpp"
+#include "../include/tracker.hpp"
 #include <opencv2/opencv.hpp>
-
+#include <opencv2/core.hpp>
+#include <opencv2/core/ocl.hpp>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/videoio.hpp>
+#include <opencv2/highgui.hpp>
 
 namespace acme {
 /**
@@ -67,8 +72,8 @@ class Utils {
      * @param insize 
      * @param outsize 
      */
-    void draw(cv::Mat frame, std::vector<acme::Object> &pose_bboxes,
-            cv::Size insize, cv::Size outsize);
+    void draw(cv::Mat frame, std::vector<acme::Pose> &pose_bboxes,
+            cv::Size insize, cv::Size outsize, bool display);
     /**
      * @brief Calculate IoU
      * 
@@ -76,7 +81,7 @@ class Utils {
      * @param pose2 
      * @return double 
      */
-    double calculateIoU(acme::Pose &pose1, acme::Pose &pose2);
+    double calculateIoU(acme::Object &pose1, acme::Object &pose2);
 };
 }  // namespace acme
 
