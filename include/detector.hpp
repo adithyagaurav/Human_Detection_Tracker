@@ -74,7 +74,6 @@ struct Pose {
     double box_w_;
     double box_z_;
     std::string class_name_;
-    std::vector<std::string> all_classes;
 };
 
 /**
