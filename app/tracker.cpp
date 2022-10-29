@@ -39,18 +39,50 @@
 #include "../include/tracker.hpp"
 
 std::vector<acme::Object> acme::Tracker::updateTracker(
-                                std::vector<acme::Object> bboxes) {
+                                std::vector<acme::Object> bboxes, int frame_id) {
 
-    int count = 0;
-    for (auto& it : bboxes) {
-        if (it.class_name == "person") {
-            count = count + 1;
-            it.track_idx_ = count;
+    std::vector<acme::Object> new_objs;
+    acme::Utils utils_obj;
+    double max_score;
+    double score;
+    std::cout<<frame_id<<std::endl;
+    if (frame_id == 0) {
+        std::cout<<"HERE"<<std::endl;
+        int count = 0;
+        for (auto& it : bboxes) {
+            if (it.class_name == "person") {
+                count = count + 1;
+                it.track_idx_ = count;
+                new_objs.push_back(it);
+                std::cout<<count<<std::endl;
+            }
         }
+        tracks_ = new_objs;
     }
-    
-    std::cout << "Track IDs assigned" << std::endl;
-    return bboxes;
+    else {
+        std::cout<<"FINDING TRACKS"<<std::endl;
+        for (auto new_box : bboxes){
+            max_score = INT_MIN;
+            if (new_box.class_name!="person"){
+                std::cout<<"INVALID CLASS"<<std::endl;
+                continue;
+            }
+            for (auto old_box:tracks_){
+                score = utils_obj.calculateIoU(new_box, old_box);
+                if (score>max_score) {
+                    max_score = score;
+                    new_box.track_idx_ = old_box.track_idx_;
+                }
+                if (max_score == INT_MIN){
+                    new_box.track_idx_ = rand()%10 + 20;
+                }
+            }
+            new_objs.push_back(new_box);
+
+        }
+        tracks_ = new_objs;
+    }
+    return tracks_;
 }
 
 acme::Tracker::Tracker() {

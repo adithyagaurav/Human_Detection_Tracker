@@ -39,7 +39,9 @@
 #define INCLUDE_TRACKER_HPP_
 #include <iostream>
 #include <vector>
+#include <limits.h>
 #include "../include/detector.hpp"
+#include "../include/utils.hpp"
 
 namespace acme {
 /**
@@ -54,7 +56,7 @@ class Tracker {
         * @param bboxes 
         * @return std::vector<acme::Object> 
         */
-    std::vector<acme::Object> updateTracker(std::vector<acme::Object> bboxes);
+    std::vector<acme::Object> updateTracker(std::vector<acme::Object> bboxes, int frame_id);
     /**
         * @brief Construct a new Tracker object
         * 
