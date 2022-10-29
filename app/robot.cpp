@@ -45,8 +45,8 @@ acme::Robot::Robot(double focal_length) {
   // Set the constants
   double image_w_ = 416;
   double image_h_ = 416;
-  float conf = 0.5;
-  depth_coeff_ = 0.7;
+  float conf = 0.4;
+  depth_coeff_ = 10;
   std::vector<std::string> targetClasses{"person"};
 
   // Create Detector class object
@@ -93,9 +93,9 @@ void acme::Robot::processImage(std::string imagePath) {
 
     // Create Utils class object
     acme::Utils utils_;
-
+    std::vector<acme::Pose> final_output = utils_.getFinalBoxes(output, depth_coeff_);
     // Draw output on image
-    utils_.draw(img , output, insize, outsize, false);
+    utils_.draw(img, final_output, insize, outsize, false);
 
     // Display detection information
     std::cout << "Total objects found : " << output.size() << std::endl;
@@ -113,6 +113,7 @@ void acme::Robot::processStream() {
     cv::Mat frame;
     cap>>frame;
     std::vector<acme::Object> output;
+    std::vector<acme::Pose> final_output;
     cv::Mat resizeFrame;
     cv::Size insize = cv::Size(416, 416);
     cv::Size outsize = frame.size();
@@ -123,7 +124,9 @@ void acme::Robot::processStream() {
         cap >> frame;
         cv::resize(frame, resizeFrame, insize);
         output = detector_.detect(resizeFrame);
-        utils_.draw(frame, output, insize, outsize, true);
+        output = tracker_.updateTracker(output, counter);
+        final_output = utils_.getFinalBoxes(output, depth_coeff_);
+        utils_.draw(frame, final_output, insize, outsize, true);
         counter++;
         std::cout<<"Frame processed : "<<counter<<std::endl;
 
