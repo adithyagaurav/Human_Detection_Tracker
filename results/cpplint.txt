@@ -9,4 +9,3 @@ Done processing ./include/tracker.hpp
 Done processing ./include/utils.hpp
 Done processing ./test/main.cpp
 Done processing ./test/test.cpp
-Total errors found: 3

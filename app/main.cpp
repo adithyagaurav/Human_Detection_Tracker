@@ -52,14 +52,10 @@ int main() {
     std::cin >> mode;
     std::cout << std::endl;
 
-    // Get User input for focal length
-    std::cout << "Enter focal length : ";
-    std::cin >> focalLength;
-    std::cout << std::endl;
-
     // Create object for robot class
     acme::Robot robot(focalLength);
 
     // Run object detection
     robot.run(mode);
+
 }

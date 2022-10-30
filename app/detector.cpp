@@ -40,12 +40,10 @@
 #include <vector>
 
 acme::Detector::Detector(double imgW, double imgH,
-                        const std::vector<std::string> &targets, float conf) {
-    // Set the required attributes
-    imgH_ = imgH;
-    imgW_ = imgW;
-    targetClasses_ = targets;
-    confThresh_ = conf;
+                        const std::vector<std::string> &targets, float conf)\
+                        :imgH_(imgH), imgW_(imgW), targetClasses_(targets)\
+                        , confThresh_(conf) {
+    // Set the required attributes;
     nmsThresh_ = 0.2;
     // Load model and run dummy test
     acme::Detector::initModel();
@@ -169,7 +167,7 @@ std::vector<acme::Object> acme::Detector::postProcess(const cv::Size &s) {
     for ( int index : indices ) {
         // Store bbox information as object structure
         cv::Rect bbox = bboxes[index];
-        double conf = static_cast<double>(confidences[index]);
+        // double conf = static_cast<double>(confidences[index]);
         std::string name = class_names[index];
         std::cout << "Class found: " << name << std::endl;
 

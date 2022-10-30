@@ -38,14 +38,15 @@
  */
 
 #include "../include/robot.hpp"
+#include <string>
 
 
-acme::Robot::Robot(double focal_length) {
+acme::Robot::Robot(double focal_length = 0) {
   // Set the constants
   double image_w_ = 416;
   double image_h_ = 416;
-  float conf = 0.2;
-  depth_coeff_ = 0.7;
+  float conf = 0.4;
+  depth_coeff_ = 10;
   std::vector<std::string> targetClasses{"person"};
 
   // Create Detector class object
@@ -53,7 +54,7 @@ acme::Robot::Robot(double focal_length) {
   detector_ = detector;
 
   // Set focal length
-  float focal_length_ = focal_length;
+//   float focal_length_ = focal_length;
 
   // Create tracker class object
   acme::Tracker tracker_;
@@ -92,9 +93,10 @@ void acme::Robot::processImage(std::string imagePath) {
 
     // Create Utils class object
     acme::Utils utils_;
-
+    std::vector<acme::Pose> final_output = \
+    utils_.getFinalBoxes(output, depth_coeff_);
     // Draw output on image
-    utils_.draw(img , output, insize, outsize);
+    utils_.draw(img, final_output, insize, outsize, false);
 
     // Display detection information
     std::cout << "Total objects found : " << output.size() << std::endl;
@@ -103,5 +105,43 @@ void acme::Robot::processImage(std::string imagePath) {
 }
 
 void acme::Robot::processStream() {
-std::cout << "Processing stream" << std::endl;
+    // Set video path
+    std::string filename = "../data/test_video.mp4";
+
+    // OpenCV video capture object instantiation
+    cv::VideoCapture cap;
+    cap.open(filename, cv::CAP_FFMPEG);
+
+    // Set containers for image frames and outputs
+    cv::Mat frame;
+    cap >> frame;
+    std::vector<acme::Object> output;
+    std::vector<acme::Pose> final_output;
+    cv::Mat resizeFrame;
+    cv::Size insize = cv::Size(416, 416);
+    cv::Size outsize = frame.size();
+
+    // Create utils class object
+    acme::Utils utils_;
+    int counter = 0;
+    while (cap.isOpened()) {
+        // Read frame
+        cap >> frame;
+        // Check if frame is valid
+        if (frame.size().width == 0) {
+            break;
+        }
+        // Resize frame
+        cv::resize(frame, resizeFrame, insize);
+        // Run Object detection
+        output = detector_.detect(resizeFrame);
+        // Run tracking
+        output = tracker_.updateTracker(output, counter);
+        // Calculate robot frame pose
+        final_output = utils_.getFinalBoxes(output, depth_coeff_);
+        // Draw bounding boxes on image to display
+        utils_.draw(frame, final_output, insize, outsize, true);
+        counter++;
+        std::cout <<"Frame processed : " << counter << std::endl;
+    }
 }
