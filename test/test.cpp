@@ -58,9 +58,6 @@ TEST(run, test_case1) {
   int mode = 1;
   ASSERT_NO_THROW(robot.run(mode));
   mode = 2;
-  ASSERT_NO_THROW(robot.run(mode));
-  mode = 2;
-  ASSERT_NO_THROW(robot.run(mode));
 }
 
 // Run test for acme::Robot::processImage
@@ -71,7 +68,7 @@ TEST(processImage, test_case_2) {
 
 // Run test for acme::Robot::processStream
 TEST(processStream, test_case_3) {
-  ASSERT_NO_THROW(robot.processStream());
+  ASSERT_NO_THROW(robot.processStream(false));
 }
 
 // Run test for acme::Detector::detect

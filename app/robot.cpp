@@ -71,7 +71,7 @@ void acme::Robot::run(int mode) {
         std::string imagePath = "../data/image3.jpg";
         processImage(imagePath);
     } else if (mode == 2) {
-        processStream();
+        processStream(true);
     } else {
         std::cout << "Invalid mode" << std::endl;
     }
@@ -104,7 +104,7 @@ void acme::Robot::processImage(std::string imagePath) {
     << img.size().height << std::endl;
 }
 
-void acme::Robot::processStream() {
+void acme::Robot::processStream(bool display) {
     // Set video path
     std::string filename = "../data/test_video.mp4";
 
@@ -140,7 +140,9 @@ void acme::Robot::processStream() {
         // Calculate robot frame pose
         final_output = utils_.getFinalBoxes(output, depth_coeff_);
         // Draw bounding boxes on image to display
-        utils_.draw(frame, final_output, insize, outsize, true);
+        if (display){
+            utils_.draw(frame, final_output, insize, outsize, true);
+        }
         counter++;
         std::cout <<"Frame processed : " << counter << std::endl;
     }

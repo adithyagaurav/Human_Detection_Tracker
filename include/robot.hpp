@@ -78,7 +78,7 @@ class Robot {
             * @brief Function to perform Human detection on stream
             * 
             */
-        void processStream();
+        void processStream(bool display);
         /**
             * @brief Construct a new Robot object
             * 
