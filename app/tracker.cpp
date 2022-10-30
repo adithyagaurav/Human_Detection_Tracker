@@ -40,35 +40,44 @@
 
 std::vector<acme::Object> acme::Tracker::updateTracker(
                                 std::vector<acme::Object> bboxes, int frame_id) {
-
+    // Create container to hold objects
     std::vector<acme::Object> new_objs;
     acme::Utils utils_obj;
     double max_score;
     double score;
     std::cout<<frame_id<<std::endl;
+    // For first frame
     if (frame_id == 0) {
-        std::cout<<"HERE"<<std::endl;
         int count = 0;
+        // Iterate over each bounding box
         for (auto& it : bboxes) {
             if (it.class_name == "person") {
                 count = count + 1;
+                // Assign ID
                 it.track_idx_ = count;
+                // Store object with updated track ID
                 new_objs.push_back(it);
                 std::cout<<count<<std::endl;
             }
         }
+        // Update track for all bboxes
         tracks_ = new_objs;
     }
     else {
+        // For each frame after first frame
         std::cout<<"FINDING TRACKS"<<std::endl;
+        // Iterate over each bounding box
         for (auto new_box : bboxes){
             max_score = INT_MIN;
+            // Check valid class
             if (new_box.class_name!="person"){
                 std::cout<<"INVALID CLASS"<<std::endl;
                 continue;
             }
+            // Compute IoU with each track in previous frame
             for (auto old_box:tracks_){
                 score = utils_obj.calculateIoU(new_box, old_box);
+                // Assign ID of object with highest IoU score to current frame bbox
                 if (score>max_score) {
                     max_score = score;
                     new_box.track_idx_ = old_box.track_idx_;
@@ -77,9 +86,11 @@ std::vector<acme::Object> acme::Tracker::updateTracker(
                     new_box.track_idx_ = rand()%10 + 20;
                 }
             }
+            // Store new bounding box
             new_objs.push_back(new_box);
 
         }
+        // Update tracks for current frame
         tracks_ = new_objs;
     }
     return tracks_;

@@ -104,12 +104,15 @@ void acme::Robot::processImage(std::string imagePath) {
 }
 
 void acme::Robot::processStream() {
-    
-    // std::string filename = "../data/test_video.mp4";
-    std::string filename = "/home/ubuntu/PMRO/ENPM808X/midterm/Human_Detection_Tracker/data/test_video.mp4";
 
+    // Set video path
+    std::string filename = "../data/test_video.mp4";
+
+    // OpenCV video capture object instantiation
     cv::VideoCapture cap;
     cap.open(filename, cv::CAP_FFMPEG);
+
+    // Set containers for image frames and outputs
     cv::Mat frame;
     cap>>frame;
     std::vector<acme::Object> output;
@@ -117,22 +120,31 @@ void acme::Robot::processStream() {
     cv::Mat resizeFrame;
     cv::Size insize = cv::Size(416, 416);
     cv::Size outsize = frame.size();
+
+    // Create utils class object
     acme::Utils utils_;
     int counter=0;
-    while(frame.size().width!=0)
+    while(cap.isOpened())
     {
+        // Read frame
         cap >> frame;
+        // Check if frame is valid
+        if (frame.size().width==0){
+            break;
+        }
+        // Resize frame
         cv::resize(frame, resizeFrame, insize);
+        // Run Object detection
         output = detector_.detect(resizeFrame);
+        // Run tracking
         output = tracker_.updateTracker(output, counter);
+        // Calculate robot frame pose
         final_output = utils_.getFinalBoxes(output, depth_coeff_);
+        // Draw bounding boxes on image to display
         utils_.draw(frame, final_output, insize, outsize, true);
         counter++;
         std::cout<<"Frame processed : "<<counter<<std::endl;
 
-    }
-    if (!cap.isOpened()){
-        std::cerr<<"UNABLE TO OPEN CAMERA"<<std::endl;
     }
 
 }

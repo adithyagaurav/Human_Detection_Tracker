@@ -98,7 +98,7 @@ TEST(updateTracker, test_case_7) {
   cv::Mat img = cv::imread("../data/image3.jpg");
   std::vector<acme::Object> output = detector.detect(img);
   ASSERT_EQ(
-    static_cast<int>(tracker.updateTracker(output).size()), output.size());
+    static_cast<int>(tracker.updateTracker(output, 0).size()), output.size());
 }
 
 // Run test for acme::Utils::draw
@@ -106,10 +106,12 @@ TEST(draw, test_case_8) {
   cv::Mat img = cv::imread("../data/image3.jpg");
   cv::Mat resizeImg;
   cv::resize(img, resizeImg, cv::Size(416, 416));
+  float depth_coeff = 0.7;
   std::vector<acme::Object> output = detector.detect(img);
+  std::vector<acme::Pose> final_output = utils_object.getFinalBoxes(output, depth_coeff);
   cv::Size insize = cv::Size(416, 416);
   cv::Size outsize = img.size();
-  ASSERT_NO_THROW(utils_object.draw(img, output, insize, outsize));
+  ASSERT_NO_THROW(utils_object.draw(img, final_output, insize, outsize, false));
 }
 
 // Run test for acme::Utils::getFinalBoxes
@@ -124,7 +126,12 @@ TEST(getFinalBoxes, test_case_9) {
 
 // Run test for acme::Utils::calculateIoU
 TEST(calculateIoU, test_case_10) {
-  acme::Pose pose1;
-  acme::Pose pose2;
-  ASSERT_EQ(utils_object.calculateIoU(pose1, pose2), 0.8);
+  acme::Object groundTruth{0, 121.0, 80.0, 511.0, 191.0, "person"};
+
+  cv::Mat img = cv::imread("../data/IoUtest.jpg");
+  cv::Mat resizeImg;
+  cv::resize(img, resizeImg, cv::Size(416, 416));
+  float depth_coeff = 0.7;
+  std::vector<acme::Object> output = detector.detect(img);
+  ASSERT_NEAR(0.8, utils_object.calculateIoU(groundTruth, output[0]), 0.2);
 }

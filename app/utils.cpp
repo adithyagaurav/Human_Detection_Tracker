@@ -41,12 +41,14 @@
 
 std::vector<acme::Pose> acme::Utils::getFinalBoxes(
                   std::vector<acme::Object> &bboxes, float depth_coeff) {
-
+    // Container for holding output
     std::vector<Pose> output;
+    // Iterate over each bounding box
     for (auto it : bboxes) {
+        // Compute depth using lens formula
         float actual_h = 72;
         float depth = depth_coeff * it.box_h_/actual_h;
-
+        // Initialize Pose object with depth information
         acme::Pose pose{it.track_idx_, it.box_x_, it.box_y_, it.box_h_, it.box_w_, depth, it.class_name};
         output.push_back(pose);
     }
@@ -94,32 +96,35 @@ void acme::Utils::draw(cv::Mat frame, std::vector<acme::Pose> &obj_bboxes,
 }
 
 double acme::Utils::calculateIoU(acme::Object &obj1, acme::Object &obj2) {
+    // Get minimum and maximum value fir bounding box 1
     double minx_obj1 = obj1.box_x_;
     double maxx_obj1 = obj1.box_x_ + obj1.box_w_;
     double miny_obj1 = obj1.box_y_;
     double maxy_obj1 = obj1.box_y_+ obj1.box_h_;
 
-    // get min and max values of 2nd bounding box
+    // Get minimum and maximum values of bounding box 2
     double minx_obj2 = obj2.box_x_;
     double maxx_obj2 = obj2.box_x_ + obj2.box_w_;
     double miny_obj2 = obj2.box_y_;
     double maxy_obj2 = obj2.box_y_+ obj2.box_h_;
 
-    // calculate intersecting x and y point
+    // Calculate intersecting x and y point
     double intersection_x = std::min(maxx_obj2, maxx_obj1) - std::max(minx_obj2, minx_obj1);
     double intersection_y = std::min(maxy_obj2, maxy_obj1) - std::max(miny_obj2, miny_obj1);
 
-    // calculate area of bboxes
+    // Calculate area of bboxes
     double area1 = (maxx_obj1 - minx_obj1)*(maxy_obj1 - miny_obj1);
     double area2 = (maxx_obj2 - minx_obj2)*(maxy_obj2 - miny_obj2);
 
-    // calculate intersection
+    // Calculate intersection
     double intersectionScore = intersection_x * intersection_y;
-    // calculate union
+    // Calculate union
     double unionScore = area1 + area2 - intersectionScore;
-    // calculate Intersection over Union
+    // Calculate Intersection over Union
     if ( unionScore != 0 ) {
-    return intersectionScore / unionScore;
-    } else { return 0.0; }
+        return intersectionScore / unionScore;
+    } else { 
+        return 0.0; 
+    }
 
 }
