@@ -49,13 +49,14 @@ std::vector<acme::Pose> acme::Utils::getFinalBoxes(
         float actual_h = 72;
         float depth = depth_coeff * it.box_h_/actual_h;
         // Initialize Pose object with depth information
-        acme::Pose pose{it.track_idx_, it.box_x_, it.box_y_, it.box_h_, it.box_w_, depth, it.class_name};
+        acme::Pose pose{it.track_idx_, it.box_x_, it.box_y_, it.box_h_, \
+        it.box_w_, depth, it.class_name};
         output.push_back(pose);
     }
     return output;
 }
 
-void acme::Utils::draw(cv::Mat frame, std::vector<acme::Pose> &obj_bboxes,
+void acme::Utils::draw(cv::Mat frame, const std::vector<acme::Pose> &obj_bboxes,
                cv::Size insize, cv::Size outsize, bool display) {
     // Create copy of frame
     cv::Mat out_frame = frame.clone();
@@ -77,16 +78,17 @@ void acme::Utils::draw(cv::Mat frame, std::vector<acme::Pose> &obj_bboxes,
         obj_bboxes[i].box_h_)*outsize.height / insize.height);
         // Draw rectangle
         cv::rectangle(out_frame, tl, br, color, 1);
-        if (display){
+        if (display) {
             cv::Point label_tl = cv::Point(tl.x, abs(tl.y - 10));
-            std::string label_text = std::to_string(obj_bboxes[i].track_idx_) + 
+            std::string label_text = std::to_string(obj_bboxes[i].track_idx_) +
                 " (" + std::to_string(tl.x - outsize.width/2) +
                 ", " + std::to_string(tl.y - outsize.height/2) +
                 ", " + std::to_string((obj_bboxes[i].box_z_)) + ")";
-            cv::putText(out_frame, label_text, label_tl, cv::FONT_HERSHEY_SIMPLEX, 0.3, color, 2);
+            cv::putText(out_frame, label_text, label_tl, \
+            cv::FONT_HERSHEY_SIMPLEX, 0.3, color, 2);
         }
     }
-    if (display==true){
+    if (display == true) {
         cv::imshow("Output", out_frame);
         cv::waitKey(1);
     } else {
@@ -95,7 +97,8 @@ void acme::Utils::draw(cv::Mat frame, std::vector<acme::Pose> &obj_bboxes,
     }
 }
 
-double acme::Utils::calculateIoU(acme::Object &obj1, acme::Object &obj2) {
+double acme::Utils::calculateIoU(const acme::Object &obj1, \
+const acme::Object &obj2) {
     // Get minimum and maximum value fir bounding box 1
     double minx_obj1 = obj1.box_x_;
     double maxx_obj1 = obj1.box_x_ + obj1.box_w_;
@@ -109,8 +112,10 @@ double acme::Utils::calculateIoU(acme::Object &obj1, acme::Object &obj2) {
     double maxy_obj2 = obj2.box_y_+ obj2.box_h_;
 
     // Calculate intersecting x and y point
-    double intersection_x = std::min(maxx_obj2, maxx_obj1) - std::max(minx_obj2, minx_obj1);
-    double intersection_y = std::min(maxy_obj2, maxy_obj1) - std::max(miny_obj2, miny_obj1);
+    double intersection_x = std::min(maxx_obj2, \
+    maxx_obj1) - std::max(minx_obj2, minx_obj1);
+    double intersection_y = std::min(maxy_obj2, \
+    maxy_obj1) - std::max(miny_obj2, miny_obj1);
 
     // Calculate area of bboxes
     double area1 = (maxx_obj1 - minx_obj1)*(maxy_obj1 - miny_obj1);
@@ -123,8 +128,7 @@ double acme::Utils::calculateIoU(acme::Object &obj1, acme::Object &obj2) {
     // Calculate Intersection over Union
     if ( unionScore != 0 ) {
         return intersectionScore / unionScore;
-    } else { 
-        return 0.0; 
+    } else {
+        return 0.0;
     }
-
 }

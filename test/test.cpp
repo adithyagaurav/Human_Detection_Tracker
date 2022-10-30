@@ -108,7 +108,8 @@ TEST(draw, test_case_8) {
   cv::resize(img, resizeImg, cv::Size(416, 416));
   float depth_coeff = 0.7;
   std::vector<acme::Object> output = detector.detect(img);
-  std::vector<acme::Pose> final_output = utils_object.getFinalBoxes(output, depth_coeff);
+  std::vector<acme::Pose> final_output = \
+  utils_object.getFinalBoxes(output, depth_coeff);
   cv::Size insize = cv::Size(416, 416);
   cv::Size outsize = img.size();
   ASSERT_NO_THROW(utils_object.draw(img, final_output, insize, outsize, false));
@@ -131,7 +132,7 @@ TEST(calculateIoU, test_case_10) {
   cv::Mat img = cv::imread("../data/IoUtest.jpg");
   cv::Mat resizeImg;
   cv::resize(img, resizeImg, cv::Size(416, 416));
-  float depth_coeff = 0.7;
+  // float depth_coeff = 0.7;
   std::vector<acme::Object> output = detector.detect(img);
   ASSERT_NEAR(0.8, utils_object.calculateIoU(groundTruth, output[0]), 0.2);
 }

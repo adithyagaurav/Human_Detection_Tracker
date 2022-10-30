@@ -41,7 +41,7 @@
 #include <string>
 
 
-acme::Robot::Robot(double focal_length) {
+acme::Robot::Robot(double focal_length = 0) {
   // Set the constants
   double image_w_ = 416;
   double image_h_ = 416;
@@ -54,7 +54,7 @@ acme::Robot::Robot(double focal_length) {
   detector_ = detector;
 
   // Set focal length
-  float focal_length_ = focal_length;
+//   float focal_length_ = focal_length;
 
   // Create tracker class object
   acme::Tracker tracker_;
@@ -93,7 +93,8 @@ void acme::Robot::processImage(std::string imagePath) {
 
     // Create Utils class object
     acme::Utils utils_;
-    std::vector<acme::Pose> final_output = utils_.getFinalBoxes(output, depth_coeff_);
+    std::vector<acme::Pose> final_output = \
+    utils_.getFinalBoxes(output, depth_coeff_);
     // Draw output on image
     utils_.draw(img, final_output, insize, outsize, false);
 
@@ -104,7 +105,6 @@ void acme::Robot::processImage(std::string imagePath) {
 }
 
 void acme::Robot::processStream() {
-
     // Set video path
     std::string filename = "../data/test_video.mp4";
 
@@ -114,7 +114,7 @@ void acme::Robot::processStream() {
 
     // Set containers for image frames and outputs
     cv::Mat frame;
-    cap>>frame;
+    cap >> frame;
     std::vector<acme::Object> output;
     std::vector<acme::Pose> final_output;
     cv::Mat resizeFrame;
@@ -123,13 +123,12 @@ void acme::Robot::processStream() {
 
     // Create utils class object
     acme::Utils utils_;
-    int counter=0;
-    while(cap.isOpened())
-    {
+    int counter = 0;
+    while (cap.isOpened()) {
         // Read frame
         cap >> frame;
         // Check if frame is valid
-        if (frame.size().width==0){
+        if (frame.size().width == 0) {
             break;
         }
         // Resize frame
@@ -143,8 +142,6 @@ void acme::Robot::processStream() {
         // Draw bounding boxes on image to display
         utils_.draw(frame, final_output, insize, outsize, true);
         counter++;
-        std::cout<<"Frame processed : "<<counter<<std::endl;
-
+        std::cout <<"Frame processed : " << counter << std::endl;
     }
-
 }

@@ -37,9 +37,9 @@
 */
 #ifndef INCLUDE_TRACKER_HPP_
 #define INCLUDE_TRACKER_HPP_
+#include <limits>
 #include <iostream>
 #include <vector>
-#include <limits.h>
 #include "../include/detector.hpp"
 #include "../include/utils.hpp"
 
@@ -56,7 +56,8 @@ class Tracker {
         * @param bboxes 
         * @return std::vector<acme::Object> 
         */
-    std::vector<acme::Object> updateTracker(std::vector<acme::Object> bboxes, int frame_id);
+    std::vector<acme::Object> updateTracker(std::vector<acme::Object> bboxes, \
+    int frame_id);
     /**
         * @brief Construct a new Tracker object
         * 

@@ -72,7 +72,7 @@ class Utils {
      * @param insize 
      * @param outsize 
      */
-    void draw(cv::Mat frame, std::vector<acme::Pose> &pose_bboxes,
+    void draw(cv::Mat frame, const std::vector<acme::Pose> &pose_bboxes,
             cv::Size insize, cv::Size outsize, bool display);
     /**
      * @brief Calculate IoU
@@ -81,7 +81,7 @@ class Utils {
      * @param pose2 
      * @return double 
      */
-    double calculateIoU(acme::Object &pose1, acme::Object &pose2);
+    double calculateIoU(const acme::Object &pose1, const acme::Object &pose2);
 };
 }  // namespace acme
 
