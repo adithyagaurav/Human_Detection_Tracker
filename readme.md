@@ -31,7 +31,7 @@ We decided to opt for the deep learning approach for this project over tradtiona
 
 ## Video Presentation
 
-Video URL : [Google Drive Link](https://drive.google.com/file/d/1CmQ9QwxbvStY9G-XkPPm0ErwoJgXboIH/view?usp=sharing)
+Video URL : [Google Drive Link](https://drive.google.com/file/d/1bu7XKRp7KDBkUC1nEVJPUEe9Z47O6wv9/view?usp=sharing)
 
  ## UML Class Diagram
 
@@ -41,20 +41,38 @@ Video URL : [Google Drive Link](https://drive.google.com/file/d/1CmQ9QwxbvStY9G-
 
 ## Demo Output
 
-![Output from YoloV4 model](./data/output.jpg)
+#### Image Output
+
+![Output from YoloV4 model Image mode](./data/output.jpg)
+
+#### Video Output
+
+![Alt Text](./data/video_output.gif)
 
 ## Sprints and Backlogs
 For this project Agile Iterative Process techniques were followed.
-Sprint URL : [Sprint](https://docs.google.com/document/d/1zNT1Lpt2RIhAPXhDCSRGpUpMemdmEOlnC4JlLw5574I/edi)
+
+Sprint URL : [Sprint](https://docs.google.com/document/d/1zNT1Lpt2RIhAPXhDCSRGpUpMemdmEOlnC4JlLw5574I/edit)
+
 Product & Interation Backlog : [ProductBCK](https://docs.google.com/spreadsheets/d/11ZNZkYG7Tr5bm_ZU3U6apQA8bG3-O703KbSEKB_j2WA/edit#gid=0)
 
 ## Phase 1
 In phase 1, we were able to implement the image mode of the project, stubs have been written for stream mode of the project and is expected to be completed by phase 2.
 
+## Phase 2
+
+In phase 2, we were able to implement the video detection mode of the project along with modules for tracking and pose estimation. Following observations are interesting:
+
+1. Tracking performance deterioriates after some frames
+2. This deterioration is possible due to detector issues.
+
 ## Standard install via command-line
+
 ```
-git clone --recursive https://github.com/dpiet/cpp-boilerplate
+git clone --recursive https://github.com/adithyagaurav/Human_Detection_Tracker
 cd <path to repository>
+chmod +x requirements.sh
+./requirements.sh
 mkdir build
 cd build
 cmake ..
@@ -63,7 +81,7 @@ Run tests: ./test/cpp-test
 Run program: ./app/shell-app
 ```
 
-## Building for code coverage (for assignments beginning in Week 4)
+## Building for code coverage 
 ```
 sudo apt-get install lcov
 cmake -D COVERAGE=ON -D CMAKE_BUILD_TYPE=Debug ../
