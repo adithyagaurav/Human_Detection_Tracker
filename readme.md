@@ -52,8 +52,8 @@ Video URL : [Google Drive Link](https://drive.google.com/file/d/1bu7XKRp7KDBkUC1
 =======
 ## Sprints and Backlogs
 For this project Agile Iterative Process techniques were followed.
-Sprint URL : [Sprint](https://docs.google.com/document/d/1zNT1Lpt2RIhAPXhDCSRGpUpMemdmEOlnC4JlLw5574I/edit)
-Product & Interation Backlog : [ProductBCK](https://docs.google.com/spreadsheets/d/11ZNZkYG7Tr5bm_ZU3U6apQA8bG3-O703KbSEKB_j2WA/edit#gid=0)
+Sprint URL : [Sprint](https://docs.google.com/spreadsheets/d/11ZNZkYG7Tr5bm_ZU3U6apQA8bG3-O703KbSEKB_j2WA/edit#gid=0)
+Product & Interation Backlog : [ProductBCK](https://docs.google.com/document/d/1zNT1Lpt2RIhAPXhDCSRGpUpMemdmEOlnC4JlLw5574I/edit)
 
 ## Phase 1
 In phase 1, we were able to implement the image mode of the project, stubs have been written for stream mode of the project and is expected to be completed by phase 2.
