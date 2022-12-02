@@ -3,13 +3,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
-
-
-
-# ENPM 808X Midterm Project 
-
-# Human Detection and Tracking
-
 # Team Members
  - **Driver** : Adithya Singh (UID - 117507047)
  - **Navigator** : Rishabh Singh (UID - 117511208)
